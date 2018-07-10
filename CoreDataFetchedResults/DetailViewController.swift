@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var ageTextField: UITextField!
@@ -27,6 +27,25 @@ class DetailViewController: UIViewController {
             photoImage.image = dataObject.photo as? UIImage
         }
     }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            fatalError("error")
+        }
+        photoImage.image = selectedImage
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func selectingImage(_ sender: UITapGestureRecognizer) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -42,7 +61,7 @@ class DetailViewController: UIViewController {
         }
         object?.age = Int64(ageValue!)
         object?.name = nameTextField.text
-        object?.photo = #imageLiteral(resourceName: "photoDefault")
+        object?.photo = photoImage.image
         DataService.shared.saveData()
     }
     

@@ -88,8 +88,12 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dc4-D6-u7j">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoDefault" translatesAutoresizingMaskIntoConstraints="NO" id="dc4-D6-u7j">
                                         <rect key="frame" x="0.0" y="121.5" width="343" height="385.5"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Fr8-aG-bWq" appends="YES" id="vp6-hD-yZU"/>
+                                        </connections>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -122,6 +126,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="V7W-9k-65L" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="Fr8-aG-bWq">
+                    <connections>
+                        <action selector="selectingImage:" destination="BYZ-38-t0r" id="Z9B-3d-Xba"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1056.8" y="117.39130434782609"/>
         </scene>
@@ -144,6 +153,9 @@
             <point key="canvasLocation" x="-690.39999999999998" y="116.49175412293854"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="photoDefault" width="280" height="175"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="DAl-U4-k9a"/>
     </inferredMetricsTieBreakers>
